@@ -34,7 +34,7 @@ with Diagram("",
         # API
         backend_api = APIGateway("後端API")
     # 上傳後前處理
-    with Cluster("Data preprocessing"):
+    with Cluster("Unstructure"):
         pdf_bucket = S3("storage")
         bucket_event = Eventbridge("Trigger")
         write2rds = StepFunctions("Data preprocessing")
@@ -69,7 +69,7 @@ with Diagram("",
     # 連線架構
     internal_users = User("HR、主管")
     user >> website >> backend_api >> pdf_bucket >> bucket_event >> write2rds
-    write2rds >> rds >> [kinesis]
+    [write2rds, backend_api] >> Edge(label="async")  >> rds >> [kinesis]
     kinesis >> lambda_func >> api_gateway
     api_gateway >> [bedrock, aws_asci, k8s]
     [bedrock, aws_asci, k8s] >> sqs1 >> lambda_processing >> [sns_de, sns_ds, sns_da] << Edge(label="subscription") << internal_users

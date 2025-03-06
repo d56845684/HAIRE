@@ -1,0 +1,11 @@
+db_identifier = "pg-cdc-instance"
+db_version = "15"
+instance_class = "db.t3.medium"
+allocated_storage = 20
+db_name = "cdc_db"
+db_username = "HAIRE"
+db_password = "834rg02sdflk"
+dms_username = "dms_user"
+dms_password = "349ejgmadnska"
+firehose_name = "pg-cdc-firehose"
+s3_bucket_arn = "arn:aws:s3:::your-firehose-cdc-bucket"
