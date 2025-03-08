@@ -1,4 +1,3 @@
-# Welcome to HAIRE!
 # 職缺訂閱推薦
 
  - 建立DB的CDC (chage data capture)機制
