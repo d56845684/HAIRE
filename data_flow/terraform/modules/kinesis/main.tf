@@ -41,7 +41,13 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_stream" {
     role_arn            = aws_iam_role.firehose_role.arn
     bucket_arn          = aws_s3_bucket.firehose_bucket.arn
     buffering_size      = 5
-    buffering_interval  = 60
+    buffering_interval  = 10
+    # 日期路徑設定
+    prefix              = "data/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/hour=!{timestamp:HH}/"
+    error_output_prefix = "errors/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/hour=!{timestamp:HH}/!{firehose:error-output-type}/"
+    processing_configuration {
+      
+    }
   }
   tags = var.tags
 }

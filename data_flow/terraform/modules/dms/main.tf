@@ -26,7 +26,8 @@ resource "aws_dms_endpoint" "pg_source" {
   database_name = var.db_name
   port          = 5432
   server_name   = var.postgres_endpoint
-  extra_connection_attributes = "pluginName=test_decoding;slotName=dms_replication_slot;"
+  extra_connection_attributes = "pluginName=test_decoding;slotName=dms_replication_slot;CaptureDdls=false;HeartbeatEnable=true"
+  # extra_connection_attributes = "pluginName=pglogical;slotName="
   tags = var.tags
 }
 
