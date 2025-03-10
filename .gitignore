@@ -3,3 +3,4 @@
 *credentials*
 *terraform.tfstate*
 *.zip
+*terraform.tfvars
