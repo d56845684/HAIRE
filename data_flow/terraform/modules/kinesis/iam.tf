@@ -33,7 +33,12 @@ resource "aws_iam_policy" "firehose_kinesis_s3_policy" {
     Statement = [
       {
         Effect   = "Allow"
-        Action   = ["kinesis:GetRecords", "kinesis:GetShardIterator", "kinesis:DescribeStream", "kinesis:ListStreams"]
+        Action   = [
+          "kinesis:GetRecords", 
+          "kinesis:GetShardIterator", 
+          "kinesis:DescribeStream", 
+          "kinesis:ListStreams"
+        ]
         Resource = aws_kinesis_stream.cdc_stream.arn
       },
       {
@@ -43,8 +48,20 @@ resource "aws_iam_policy" "firehose_kinesis_s3_policy" {
       },
       {
         Effect   = "Allow"
-        Action   = ["logs:PutLogEvents", "logs:CreateLogStream", "logs:CreateLogGroup"]
+        Action   = [
+          "logs:PutLogEvents", 
+          "logs:CreateLogStream", 
+          "logs:CreateLogGroup"
+        ]
         Resource = "arn:aws:logs:*:*:*"
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "lambda:InvokeFunction",
+          "lambda:GetFunctionConfiguration"
+        ],
+        Resource = "${aws_lambda_function.firehose_transform_lambda.arn}:*"
       }
     ]
   })

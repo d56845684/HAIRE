@@ -6,4 +6,4 @@
  - 透過lambda調用API gateway，並取得模型推論結果
  - 將結果存入SQS，並觸發lambda將結果導入Topics (這邊可以設定不同的職缺內容)
  - 使用者訂閱相關內容，即可收到結果
-![image](aws_architecture.png)
+![image](data_architecture.png)
